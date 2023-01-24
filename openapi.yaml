@@ -45,6 +45,27 @@
             '404':
               description: Order with requested id not found.
 
+      # /order/{id}/item/{itemId}:
+      #   get:
+
+      # /neworder:
+      #   post:
+
+      # /order/{orderId}/item:
+      #   post:
+
+      # /order/{id}/item/{itemId}:
+      #   delete:
+
+      # /orders/{id}:
+      #   delete:
+
+      # /order/{id}/commit:
+      #   post:
+
+
+
+
     components:
       schemas:
         Order:
