@@ -45,8 +45,33 @@
             '404':
               description: Order with requested id not found.
 
-      # /order/{id}/item/{itemId}:
-      #   get:
+      /order/{id}/item/{itemId}:
+        get:
+          summary: Retrieving all line items of an order with a given id
+          parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+              format: int32
+            required: true
+          - in: path
+            name: itemId
+            schema:
+              type: integer
+              format: int32
+            required: true
+          responses:
+            '200':
+              description: Retrieved item of order with given id. 
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    item:
+                      $ref: '#/components/schemas/Item'
+            '404':
+              description: Order with requested id of item not found.
 
       # /neworder:
       #   post:
@@ -69,6 +94,11 @@
     components:
       schemas:
         Order:
+          type: object
+          properties:
+            name:
+              type: string
+        Item:
           type: object
           properties:
             name:
