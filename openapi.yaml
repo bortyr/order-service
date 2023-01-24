@@ -72,8 +72,24 @@
             '404':
               description: Order with requested id of item not found.
 
-      # /neworder:
-      #   post:
+      /neworder:
+        post:
+          summary: Returns a new order.
+          parameters:
+          - in: header
+            name: customerName
+            schema:
+              type: string
+            required: true
+          responses:
+            '200':
+              description: Created new order.
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Order'
+            '404':
+              description: Order with requested id of item not found.
 
       # /order/{orderId}/item:
       #   post:
