@@ -91,8 +91,25 @@
             '404':
               description: Order with requested id of item not found.
 
-      # /order/{orderId}/item:
-      #   post:
+      /order/{orderId}/item:
+        post:
+          summary: Adding a new line item to an order
+          parameters:
+          - in: path 
+            name: orderId 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          responses:
+            '200':
+              description: Added new line item to an order 
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Item'
+            '404':
+              description: Order with requested id of item not found.
 
       # /order/{id}/item/{itemId}:
       #   delete:
