@@ -1,0 +1,55 @@
+    openapi: 3.1.0
+
+    info:
+      title: Order Service API
+      description: Order Service API for putting orders  
+      version: 1.0.0
+
+    servers:
+      - url: http://api.orderservice.com/v1
+        description: Main production server
+
+    paths:
+      /products:
+        get:
+          summary: Returns a list of products.
+          responses:
+            '200':
+              description: A JSON array of products 
+              content:
+                application/json:
+                  schema: 
+                    type: array
+                    items: 
+                      type: Product 
+      /products/{id}:
+        put:
+          summary: Update products 
+          description: Update existing product with given id.
+          parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+              format: int32
+            required: true
+          - in: header 
+            name: updatedProduct
+            description: updatedProducts
+            required: true
+            schema:
+              $ref: "#/components/schemas/Product"
+          responses:
+            '200':
+              description: The updated or newly added product. 
+            '404':
+              description: Product with requested id not found.
+
+    components:
+      schemas:
+        Product:
+          type: object
+          properties:
+            name:
+              type: string
+
