@@ -33,15 +33,14 @@
               type: integer
               format: int32
             required: true
-          - in: header 
-            name: updatedOrder
-            description: updatedOrders
-            required: true
-            schema:
-              $ref: "#/components/schemas/Order"
           responses:
             '200':
               description: The updated or newly added order. 
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Order"
+
             '404':
               description: Order with requested id not found.
 
