@@ -116,7 +116,13 @@
           summary: Removing a line item from an order.
           parameters:
           - in: path 
-            name: orderId 
+            name: id 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          - in: path 
+            name: itemId 
             schema:
               type: integer
               format: int32
