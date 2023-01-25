@@ -147,13 +147,23 @@
             '200':
               description: Removed an order 
             '404':
-              description: Order with requested id.
+              description: Order with requested id not found.
 
-      # /order/{id}/commit:
-      #   post:
-
-
-
+      /order/{id}/commit:
+        post:
+          summary: Purchase an order
+          parameters:
+          - in: path 
+            name: id 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          responses:
+            '200':
+              description: Purchased an order. 
+            '404':
+              description: Order with requested id not found.
 
     components:
       schemas:
