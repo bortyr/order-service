@@ -111,8 +111,21 @@
             '404':
               description: Order with requested id of item not found.
 
-      # /order/{id}/item/{itemId}:
-      #   delete:
+      /order/{id}/item/{itemId}/delete:
+        delete: 
+          summary: Removing a line item from an order.
+          parameters:
+          - in: path 
+            name: orderId 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          responses:
+            '200':
+              description: Removed line item from an order 
+            '404':
+              description: Order with requested id of item not found.
 
       # /orders/{id}:
       #   delete:
