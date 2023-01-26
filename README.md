@@ -28,8 +28,3 @@ Run the service in the generated directory. It will start on port 8080
 ```sh
 mvn package spring-boot:run
 ```
-
-## Additional Notes
-
-OpenAPI generator didn't allow for identical paths for our REST service (ex. /order/{id} differented with PUT or DELETE).
-Thus for OpenAPI docs as temporary solution suffix was added with "/delete" as the previous project has already been delievered to our client.
