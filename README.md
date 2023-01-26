@@ -24,7 +24,7 @@ If it's not present, generate it:
 openapi-generator generate -g spring -i openapi.yaml -c conf.json -o order-service 
 ```
 
-Run the service. It will start on port 8080
+Run the service in the generated directory. It will start on port 8080
 ```sh
 mvn package spring-boot:run
 ```
