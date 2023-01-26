@@ -22,10 +22,12 @@
                     type: array
                     items: 
                       type: Order 
+            '404':
+              description: Orders not found.
+
       /orders/{id}:
-        put:
-          summary: Update Orders 
-          description: Update existing order with given id.
+        get:
+          summary: Get an order with a given id.
           parameters:
           - in: path
             name: id
@@ -35,7 +37,7 @@
             required: true
           responses:
             '200':
-              description: The updated or newly added order. 
+              description: Received order with given id.
               content:
                 application/json:
                   schema:
@@ -43,10 +45,24 @@
 
             '404':
               description: Order with requested id not found.
+        delete:
+          summary: Removing an order. 
+          parameters:
+          - in: path 
+            name: id 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          responses:
+            '200':
+              description: Removed an order 
+            '404':
+              description: Order with requested id not found.
 
       /order/{id}/item/{itemId}:
         get:
-          summary: Retrieving all line items of an order with a given id
+          summary: Retrieving all line items of an order with a given id.
           parameters:
           - in: path
             name: id
@@ -62,13 +78,33 @@
             required: true
           responses:
             '200':
-              description: Retrieved item of order with given id. 
+              description: Retrieved item of order with given id.
               content:
                 application/json:
                   schema:
                     type: array
                     item:
                       $ref: '#/components/schemas/Item'
+            '404':
+              description: Order with requested id of item not found.
+        delete: 
+          summary: Removing a line item from an order.
+          parameters:
+          - in: path 
+            name: id 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          - in: path 
+            name: itemId 
+            schema:
+              type: integer
+              format: int32
+            required: true
+          responses:
+            '200':
+              description: Removed line item from an order 
             '404':
               description: Order with requested id of item not found.
 
@@ -110,44 +146,6 @@
                     $ref: '#/components/schemas/Item'
             '404':
               description: Order with requested id of item not found.
-
-      /order/{id}/item/{itemId}/delete:
-        delete: 
-          summary: Removing a line item from an order.
-          parameters:
-          - in: path 
-            name: id 
-            schema:
-              type: integer
-              format: int32
-            required: true
-          - in: path 
-            name: itemId 
-            schema:
-              type: integer
-              format: int32
-            required: true
-          responses:
-            '200':
-              description: Removed line item from an order 
-            '404':
-              description: Order with requested id of item not found.
-
-      /orders/{id}/delete:
-        delete:
-          summary: Removing an order. 
-          parameters:
-          - in: path 
-            name: id 
-            schema:
-              type: integer
-              format: int32
-            required: true
-          responses:
-            '200':
-              description: Removed an order 
-            '404':
-              description: Order with requested id not found.
 
       /order/{id}/commit:
         post:
