@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  description: Order Service API for putting orders
+  title: Order Service API
+  version: 1.0.0
+servers:
+- description: Main production server
+  url: http://api.orderservice.com/v1
+paths:
+  /orders:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items: {}
+          description: A JSON array of orders
+        "404":
+          description: Orders not found.
+      summary: Returns a list of orders.
+      x-accepts: application/json
+  /orders/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+        style: simple
+      responses:
+        "200":
+          description: Removed an order
+        "404":
+          description: Order with requested id not found.
+      summary: Removing an order.
+      x-accepts: application/json
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Received order with given id.
+        "404":
+          description: Order with requested id not found.
+      summary: Get an order with a given id.
+      x-accepts: application/json
+  /order/{id}/item/{itemId}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+        style: simple
+      - explode: false
+        in: path
+        name: itemId
+        required: true
+        schema:
+          format: int32
+        style: simple
+      responses:
+        "200":
+          description: Removed line item from an order
+        "404":
+          description: Order with requested id of item not found.
+      summary: Removing a line item from an order.
+      x-accepts: application/json
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+        style: simple
+      - explode: false
+        in: path
+        name: itemId
+        required: true
+        schema:
+          format: int32
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                item:
+                  $ref: '#/components/schemas/Item'
+          description: Retrieved item of order with given id.
+        "404":
+          description: Order with requested id of item not found.
+      summary: Retrieving all line items of an order with a given id.
+      x-accepts: application/json
+  /neworder:
+    post:
+      parameters:
+      - explode: false
+        in: header
+        name: customerName
+        required: true
+        schema: {}
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Created new order.
+        "404":
+          description: Order with requested id of item not found.
+      summary: Returns a new order.
+      x-accepts: application/json
+  /order/{orderId}/item:
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          format: int32
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+          description: Added new line item to an order
+        "404":
+          description: Order with requested id of item not found.
+      summary: Adding a new line item to an order
+      x-accepts: application/json
+  /order/{id}/commit:
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+        style: simple
+      responses:
+        "200":
+          description: Purchased an order.
+        "404":
+          description: Order with requested id not found.
+      summary: Purchase an order
+      x-accepts: application/json
+components:
+  schemas:
+    Order:
+      example:
+        name: ""
+      properties:
+        name: {}
+    Item:
+      example:
+        name: ""
+      properties:
+        name: {}
