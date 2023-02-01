@@ -4,6 +4,10 @@
 
 Change into directory of project from the previous assignment and launch it with IntelliJ IDEA.
 
+```sh
+cd RabbitMQProject
+```
+
 Start RabbitMQ as docker container:
 
 ```sh
