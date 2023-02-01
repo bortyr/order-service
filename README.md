@@ -2,7 +2,7 @@
 
 ## Getting started
 
-Download our project from the previous assignment and launch it with IntelliJ IDEA.
+Change into directory of project from the previous assignment and launch it with IntelliJ IDEA.
 
 Start RabbitMQ as docker container:
 
